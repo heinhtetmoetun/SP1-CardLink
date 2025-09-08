@@ -33,7 +33,7 @@ Powered by **React Native (Expo)**, **Node.js / Express**, **MongoDB**, and **Cl
 ## 🐰 About Me
 Hi! I’m **Hein Htet Moe Tun (Hyan)** ✨  
 This repo is my senior project submission — part academic, part portfolio, part fun.  
-I love blending **clean design** with a touch of 🌲 nature and Japanese minimalism ⛩️.  
+I love blending **clean design** with a touch of 🌲 kawai energy ⛩️.  
 
 ---
 
