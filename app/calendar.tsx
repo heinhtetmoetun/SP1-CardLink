@@ -117,4 +117,4 @@ export default function Appointment() {
     </View>
     </SafeAreaView>
   );
-}
+}// chore: tiny tidy by Hein Htet Moe Tun 🐰
