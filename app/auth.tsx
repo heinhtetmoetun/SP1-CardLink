@@ -385,3 +385,4 @@ export default function AuthScreen() {
 const styles = StyleSheet.create({
   // only used for absolute fill on gradient
 });
+// chore: tiny tidy by Hein Htet Moe Tun 🐰
