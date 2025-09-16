@@ -231,7 +231,7 @@ export default function AddContactScreen() {
           paddingVertical: 14,
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: "space-between",
+          gap: 16,
         }}
       >
         <TouchableOpacity onPress={() => router.back()}>
@@ -365,15 +365,22 @@ export default function AddContactScreen() {
         }}
       >
         <TouchableOpacity
-          onPress={() =>
-            router.push({
-              pathname: "/manual-fill",   // 👈 change route
-              params: {
-                contact: JSON.stringify(contact),
-                ocrData: JSON.stringify(ocrResult), // 👈 pass OCR data
-              },
-            })
-          }
+          onPress={() => {
+            if (ocrResult) {
+              router.push({
+                pathname: "/manual-fill",
+                params: {
+                  contact: JSON.stringify(contact),
+                  ocrData: JSON.stringify(ocrResult),
+                },
+              });
+            } else {
+              Alert.alert(
+                "No Information",
+                "Please scan a card or import from gallery before using Manual Fill."
+              );
+            }
+          }}
           activeOpacity={0.9}
           style={{
             borderRadius: 999,
@@ -387,6 +394,7 @@ export default function AddContactScreen() {
             gap: 8,
           }}
         >
+          <FontAwesome name="bug" size={16} color={BRAND_BLUE} />
           <Text style={{ color: BRAND_BLUE, fontWeight: "700", fontSize: 15 }}>
             Manual Fill
           </Text>
