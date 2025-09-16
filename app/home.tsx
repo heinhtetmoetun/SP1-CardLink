@@ -1,7 +1,7 @@
 // pull shark
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import * as ImagePicker from "expo-image-picker";
 import { router, useNavigation, usePathname, useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
