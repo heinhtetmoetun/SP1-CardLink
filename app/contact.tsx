@@ -469,11 +469,9 @@ function BottomNav({ hidden }: { hidden?: boolean }) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const active: "home" | "contacts" | "calendar" | "profile" =
+  const active: "home" | "contacts" | "profile" =
     pathname.startsWith("/profile")
       ? "profile"
-      : pathname.startsWith("/calendar")
-      ? "calendar"
       : pathname.startsWith("/contact")
       ? "contacts"
       : "home";
@@ -542,7 +540,6 @@ function BottomNav({ hidden }: { hidden?: boolean }) {
           </TouchableOpacity>
         )}
 
-        <Item icon="calendar-o" isActive={active === "calendar"} onPress={() => router.replace("/calendar")} />
         <Item icon="user-o" isActive={active === "profile"} onPress={() => router.replace("/profile")} />
       </View>
     </View>

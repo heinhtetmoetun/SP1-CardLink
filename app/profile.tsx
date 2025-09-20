@@ -186,11 +186,9 @@ function BottomNav({ hidden }: { hidden?: boolean }) {
   const pathname = usePathname();
   const router = useRouter();
 
-  const active: "home" | "contacts" | "calendar" | "profile" =
+  const active: "home" | "contacts" | "profile" =
     pathname.startsWith("/profile")
       ? "profile"
-      : pathname.startsWith("/calendar")
-      ? "calendar"
       : pathname.startsWith("/contact")
       ? "contacts"
       : "home";
@@ -257,7 +255,6 @@ function BottomNav({ hidden }: { hidden?: boolean }) {
       >
         <Item icon="home" isActive={active === "home"} onPress={() => router.replace("/home")} />
         <Item icon="address-book-o" isActive={active === "contacts"} onPress={() => router.replace("/contact")} />
-        <Item icon="calendar-o" isActive={active === "calendar"} onPress={() => router.replace("/calendar")} />
         <Item icon="user-o" isActive={active === "profile"} onPress={() => router.replace("/profile")} />
       </View>
     </View>

@@ -231,7 +231,7 @@ export default function AddContactScreen() {
           paddingVertical: 14,
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: "space-between",
+          gap: 16,
         }}
       >
         <TouchableOpacity onPress={() => router.back()}>
@@ -394,7 +394,7 @@ export default function AddContactScreen() {
             gap: 8,
           }}
         >
-          <FontAwesome name="bug" size={16} color={BRAND_BLUE} />
+          <FontAwesome name="pencil" size={16} color={BRAND_BLUE} />
           <Text style={{ color: BRAND_BLUE, fontWeight: "700", fontSize: 15 }}>
             Manual Fill
           </Text>
