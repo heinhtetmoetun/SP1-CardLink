@@ -11,7 +11,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -27,6 +27,7 @@ const BRAND_BLUE = "#213BBB";
 
 export default function ScanScreen() {
   const [facing] = useState<CameraType>("back"); // fixed to back
+  const [torchOn, setTorchOn] = useState(false); // 🔦 flash state
   const [permission, requestPermission] = useCameraPermissions();
   const cameraRef = useRef<any>(null);
   const router = useRouter();
@@ -64,7 +65,7 @@ export default function ScanScreen() {
   // 📤 Upload helper
   const uploadToCloudinary = async (uri: string) => {
     const base64 = await FileSystem.readAsStringAsync(uri, {
-      encoding: "base64", // ✅ fixed
+      encoding: "base64",
     });
 
     const data = new FormData();
@@ -131,8 +132,20 @@ export default function ScanScreen() {
         <TouchableOpacity onPress={() => router.back()} style={styles.backChip}>
           <FontAwesome name="arrow-left" size={16} color="white" />
         </TouchableOpacity>
+
         <Text style={styles.headerTitle}>CardLink</Text>
-        <View style={{ width: 28 }} />
+
+        {/* 🔦 Flash toggle button */}
+        <TouchableOpacity
+          onPress={() => setTorchOn((prev) => !prev)}
+          style={styles.flashBtn}
+        >
+          <FontAwesome
+            name="bolt"
+            size={18}
+            color={torchOn ? "#FFD700" : "white"} // yellow when on
+          />
+        </TouchableOpacity>
       </View>
 
       <CameraView
@@ -140,9 +153,10 @@ export default function ScanScreen() {
         facing={facing}
         ref={cameraRef}
         ratio="16:9"
+        enableTorch={torchOn} // 🔦 enable flash
       >
         <View style={styles.overlayContainer}>
-          {/* Dimmed overlay */}
+          {/* Dimmed overlay with lighter background */}
           <View style={styles.dimOverlay}>
             <View
               style={{
@@ -162,11 +176,7 @@ export default function ScanScreen() {
 
           {/* Scan button */}
           <TouchableOpacity
-            style={[
-              styles.primaryBtn,
-              capturing && { opacity: 0.6 },
-              styles.scanBtn,
-            ]}
+            style={[styles.primaryBtn, capturing && { opacity: 0.6 }, styles.scanBtn]}
             onPress={takePicture}
             disabled={capturing}
           >
@@ -213,6 +223,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  flashBtn: {
+    width: 28,
+    height: 28,
+    borderRadius: 20,
+    backgroundColor: "rgba(255,255,255,0.25)",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 
   overlayContainer: {
     flex: 1,
@@ -220,10 +238,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  // Dim with cutout
+  // Dim with cutout — FIXED brightness
   dimOverlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0,0,0,0.55)",
+    backgroundColor: "rgba(0,0,0,0.25)",
     justifyContent: "center",
     alignItems: "center",
   },

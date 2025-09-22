@@ -146,11 +146,20 @@ export default function AddContactScreen() {
         throw new Error("Could not load contacts for duplicate check");
       }
 
-      const duplicate = existing.find(
-        (c: any) =>
-          (c.email && contactToSave.email && c.email === contactToSave.email) ||
-          (c.phone && contactToSave.phone && c.phone === contactToSave.phone)
-      );
+      // normalize helper (from your friend’s version)
+      const normalize = (s: string) => (s || "").trim().toLowerCase();
+
+      const duplicate = existing.find((c: any) => {
+        const sameEmail =
+          c.email && contactToSave.email && normalize(c.email) === normalize(contactToSave.email);
+        const samePhone =
+          c.phone && contactToSave.phone && normalize(c.phone) === normalize(contactToSave.phone);
+        const sameName =
+          normalize(c.firstName) === normalize(contactToSave.firstName) &&
+          normalize(c.lastName) === normalize(contactToSave.lastName);
+
+        return sameEmail || samePhone || sameName;
+      });
 
       if (duplicate) {
         Alert.alert(
@@ -281,7 +290,7 @@ export default function AddContactScreen() {
                   }}
                 >
                   <ActivityIndicator size="large" color={BRAND_BLUE} />
-                  <Text style={{ color: "#334155", fontWeight: "600" }}>Processing OCR…</Text>
+                  <Text style={{ color: "#334155", fontWeight: "600" }}>Processing…</Text>
                 </View>
               )}
             </View>
