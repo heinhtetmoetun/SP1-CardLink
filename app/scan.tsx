@@ -62,7 +62,7 @@ export default function ScanScreen() {
     );
   }
 
-  // 📤 Upload helper
+   // 📤 Upload helper
   const uploadToCloudinary = async (uri: string) => {
     const base64 = await FileSystem.readAsStringAsync(uri, {
       encoding: "base64",

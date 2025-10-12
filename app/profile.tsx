@@ -4,6 +4,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation, usePathname, useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import { useEffect, useLayoutEffect, useState } from "react";
+import * as FileSystem from "expo-file-system/legacy";
 import {
   Alert,
   Image,

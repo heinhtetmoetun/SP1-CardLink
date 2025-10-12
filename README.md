@@ -18,10 +18,10 @@ Powered by **React Native (Expo)**, **Node.js / Express**, **MongoDB**, and **Cl
 
 <table>
   <tr>
-    <th>🥕 Splash</th>
-    <th>🥕 Home</th>
-    <th>🥕 Contacts</th>
-    <th>🥕 Scan</th>
+    <th> Splash</th>
+    <th> Home</th>
+    <th> Contacts</th>
+    <th> Scan</th>
   </tr>
   <tr>
     <td><img src="docs/screenshots/obd.PNG" width="200"/></td>
