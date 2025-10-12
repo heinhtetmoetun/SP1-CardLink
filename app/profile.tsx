@@ -8,11 +8,11 @@ import * as FileSystem from "expo-file-system/legacy";
 import {
   Alert,
   Image,
-  SafeAreaView,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const BRAND_BLUE = "#213BBB";
 const CARD_BG = "#FFFFFF";
@@ -82,7 +82,7 @@ export default function Profile() {
           style={{ width: 96, height: 96, borderRadius: 48 }}
         />
         <Text style={{ color: TEXT_PRIMARY }} className="text-lg mt-3 font-nunito font-semibold">
-          {user.name || "USER1"}
+          {user.name || "—"}
         </Text>
         <Text style={{ color: TEXT_SECONDARY }} className="text-sm font-nunito">
           {user.email || "—"}
@@ -187,11 +187,9 @@ function BottomNav({ hidden }: { hidden?: boolean }) {
   const pathname = usePathname();
   const router = useRouter();
 
-  const active: "home" | "contacts" | "calendar" | "profile" =
+  const active: "home" | "contacts" | "profile" =
     pathname.startsWith("/profile")
       ? "profile"
-      : pathname.startsWith("/calendar")
-      ? "calendar"
       : pathname.startsWith("/contact")
       ? "contacts"
       : "home";
@@ -258,7 +256,6 @@ function BottomNav({ hidden }: { hidden?: boolean }) {
       >
         <Item icon="home" isActive={active === "home"} onPress={() => router.replace("/home")} />
         <Item icon="address-book-o" isActive={active === "contacts"} onPress={() => router.replace("/contact")} />
-        <Item icon="calendar-o" isActive={active === "calendar"} onPress={() => router.replace("/calendar")} />
         <Item icon="user-o" isActive={active === "profile"} onPress={() => router.replace("/profile")} />
       </View>
     </View>
